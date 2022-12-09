@@ -35,7 +35,7 @@ None.
     - hosts: localhost
       remote_user: user
       roles:
-        - role: lxd-container
+        - role: huongtxvega.lxd_container
           vars:
             - user: user
             - image: "ubuntu/20.04"
