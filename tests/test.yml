@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  remote_user: user
+  roles:
+    - role: lxd-container
+      vars:
+        - user: user
+        - image: "ubuntu/20.04"
+        - containers:
+          - testrole

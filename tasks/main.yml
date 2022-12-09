@@ -1,0 +1,11 @@
+---
+# Variable configuration.
+- include_tasks: variables.yml
+
+# Configure.
+- import_tasks: container.yml
+
+- include_tasks: user.yml
+  loop: "{{ containers }}"
+  loop_control:
+    loop_var: container

@@ -1,0 +1,6 @@
+---
+image: "ubuntu/20.04"
+containers:
+  - test-role
+lxd_addr: "0.0.0.0:8443"
+user: "vega"

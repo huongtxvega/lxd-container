@@ -1,0 +1,17 @@
+---
+- name: "Check lxd container"
+  shell: 
+    cmd: lxc list
+  register: remote_info
+  ignore_errors: yes
+  become: no
+
+# - debug: msg="{{ remote_info.stdout }}"
+
+- name: LXD | Create container 
+  shell:
+    executable: /bin/bash
+    cmd: "lxc launch images:{{ image }} {{ item }}"
+  with_items: "{{ containers }}"
+  when:
+    - remote_info.stdout.find("{{ item }}") == -1 

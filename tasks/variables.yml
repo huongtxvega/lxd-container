@@ -1,0 +1,9 @@
+---
+# Variable configuration.
+- name: Include variables.
+  include_vars: "main.yml"
+
+# - name: Define variable.
+#   set_fact:
+#     var_name: "{{ var_from_vars | list }}"
+#   when: var_name is not defined
