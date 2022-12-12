@@ -1,19 +1,19 @@
 ---
 - name: LXD | Create user Centos
   shell:
-    cmd: lxc exec {{ container }} -- sh -c 'sudo adduser {{ user }}'
+    cmd: /snap/bin/lxc exec {{ container }} -- sh -c 'sudo adduser {{ user }}'
   ignore_errors: yes
   when: image.find("centos") != -1
 
 - name: LXD | Create user Ubuntu
   shell:
-    cmd: lxc exec {{ container }} -- sh -c 'sudo adduser --disabled-password --gecos "" {{ user }}'
+    cmd: /snap/bin/lxc exec {{ container }} -- sh -c 'sudo adduser --disabled-password --gecos "" {{ user }}'
   ignore_errors: yes
   when: image.find("ubuntu") != -1
   
 - name: "Check user in container"
   shell: 
-    cmd: lxc exec {{ container }} -- sh -c 'cat /etc/sudoers'
+    cmd: /snap/bin/lxc exec {{ container }} -- sh -c 'cat /etc/sudoers'
   register: user_info
   ignore_errors: yes
   become: yes
@@ -21,5 +21,5 @@
 - name: LXD | Add user to sudoer
   shell:
     cmd: |
-      lxc exec {{ container }} -- sh -c 'sudo echo "{{ user }} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers'
+      /snap/bin/lxc exec {{ container }} -- sh -c 'sudo echo "{{ user }} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers'
   when: user_info.stdout.find("{{ user }}") == -1
