@@ -1,6 +1,6 @@
-- name: LXD | Config lxd server
+- name: Config lxd server
   shell: 
+    executable: /bin/bash
     cmd: |
-      /snap/bin/lxc config set core.https_address={{ LXD_ADDR }}
-      /snap/bin/lxc config set core.trust_password={{ LXD_SERVER_PASS }}
-  tags: ["config"]
+      "/snap/bin/lxc config set core.https_address={{ LXD_ADDR }}"
+      "/snap/bin/lxc config set core.trust_password={{ LXD_SERVER_PASS }}"
