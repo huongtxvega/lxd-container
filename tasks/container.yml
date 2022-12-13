@@ -14,4 +14,4 @@
     cmd: "/snap/bin/lxc launch images:{{ image }} {{ item }}"
   with_items: "{{ containers }}"
   when:
-    - remote_info.stdout.search("^{{ item }}$") == -1 
+    - remote_info.stdout.find("{{ item }}") == -1 
