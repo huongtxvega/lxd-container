@@ -12,6 +12,5 @@
   shell:
     executable: /bin/bash
     cmd: "/snap/bin/lxc launch images:{{ image }} {{ item }}"
+  when: not remote_info.stdout | regex_search('\s{{ item }}\s', ignorecase=True)
   with_items: "{{ containers }}"
-  when:
-    - remote_info.stdout.find("{{ item }}") == -1 

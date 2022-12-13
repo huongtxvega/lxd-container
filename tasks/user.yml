@@ -25,4 +25,4 @@
     executable: /bin/bash
     cmd: |
       /snap/bin/lxc exec {{ container }} -- sh -c 'sudo echo "{{ user }} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers'
-  when: user_info.stdout.find("{{ user }}") == -1
+  when: not user_info.stdout | regex_search('(^|\s|\n){{ user }}\s', ignorecase=True)
