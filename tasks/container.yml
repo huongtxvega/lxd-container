@@ -1,17 +1,17 @@
 ---
-- name: "Check lxd container"
+- name: Check lxd container
   shell: 
-    cmd: /snap/bin/lxc list
+    executable: /bin/bash
+    cmd: "/snap/bin/lxc list"
   register: remote_info
-  ignore_errors: yes
-  become: no
+  ignore_errors: true
 
 # - debug: msg="{{ remote_info.stdout }}"
 
-- name: LXD | Create container 
+- name: Create container
   shell:
     executable: /bin/bash
     cmd: "/snap/bin/lxc launch images:{{ image }} {{ item }}"
   with_items: "{{ containers }}"
   when:
-    - remote_info.stdout.find("{{ item }}") == -1 
+    - remote_info.stdout.search("^{{ item }}$") == -1 
