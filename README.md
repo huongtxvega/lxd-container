@@ -9,6 +9,14 @@ Simple role for creating lxd container and add sudo-user on RHEL/CentOS or Debia
 * Ansible >= 2.9
 * Jinja2
 
+### Before you start applying  
+
+* LXD server and lxc remote connection to server  
+* Ansible role from ansible galaxy  
+  ```bash
+  $ ansible-galaxy install huongtxvega.lxd_container
+  ```
+
 ## Role Variables
 ---
 
