@@ -2,5 +2,5 @@
   shell: 
     executable: /bin/bash
     cmd: |
-      "{{ lxc_exec }} config set core.https_address={{ LXD_ADDR }}"
-      "{{ lxc_exec }} config set core.trust_password={{ LXD_SERVER_PASS }}"
+      $LXC config set core.https_address={{ LXD_ADDR }}
+      $LXC config set core.trust_password={{ LXD_SERVER_PASS }}

@@ -2,6 +2,9 @@
 # Variable configuration.
 - include_tasks: variables.yml
 
+environment:
+  LXC: "{{ lxc_exec }}"
+
 # Configure.
 - import_tasks: container.yml
 
