@@ -1,16 +1,20 @@
 ---
 - name: Check lxd container
+  environment:
+    LXC: "{{ lxc_exec }}"
   shell: 
     executable: /bin/bash
-    cmd: "{{ lxc_exec }} list"
+    cmd: $LXC list
   register: remote_info
   ignore_errors: true
 
 # - debug: msg="{{ remote_info.stdout }}"
 
 - name: Create container
+  environment:
+    LXC: "{{ lxc_exec }}"
   shell:
     executable: /bin/bash
-    cmd: "{{ lxc_exec }} launch images:{{ image }} {{ item }}"
+    cmd: $LXC launch images:{{ image }} {{ item }}
   when: not remote_info.stdout | regex_search('\s{{ item }}\s', ignorecase=True)
   with_items: "{{ containers }}"

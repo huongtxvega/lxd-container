@@ -1,35 +1,35 @@
 ---
 - name: Create user Centos
+  environment:
+    LXC: "{{ lxc_exec }}"
   shell:  
-    environment:
-      LXC: "{{ lxc_exec }}"
     executable: /bin/bash
     cmd: $LXC exec {{ container }} -- sh -c 'sudo adduser {{ user }}'
   ignore_errors: true
   when: image.find("centos") != -1
 
 - name: Create user Ubuntu
+  environment:
+    LXC: "{{ lxc_exec }}"
   shell:  
-    environment:
-      LXC: "{{ lxc_exec }}"
     executable: /bin/bash
     cmd: $LXC exec {{ container }} -- sh -c 'sudo adduser --disabled-password --gecos "" {{ user }}'
   ignore_errors: true
   when: image.find("ubuntu") != -1
   
 - name: "Check user in container"
+  environment:
+    LXC: "{{ lxc_exec }}"
   shell: 
-    environment:
-      LXC: "{{ lxc_exec }}"
     executable: /bin/bash
     cmd: $LXC exec {{ container }} -- sh -c 'cat /etc/sudoers'
   register: user_info
   ignore_errors: true
 
 - name: Add user to sudoer
+  environment:
+    LXC: "{{ lxc_exec }}"
   shell: 
-    environment:
-      LXC: "{{ lxc_exec }}"
     executable: /bin/bash
     cmd: |
       $LXC exec {{ container }} -- sh -c 'sudo echo "{{ user }} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers'
