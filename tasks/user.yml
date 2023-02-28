@@ -1,6 +1,8 @@
 ---
 - name: Create user Centos
   shell:  
+    environment:
+      LXC: "{{ lxc_exec }}"
     executable: /bin/bash
     cmd: $LXC exec {{ container }} -- sh -c 'sudo adduser {{ user }}'
   ignore_errors: true
@@ -8,6 +10,8 @@
 
 - name: Create user Ubuntu
   shell:  
+    environment:
+      LXC: "{{ lxc_exec }}"
     executable: /bin/bash
     cmd: $LXC exec {{ container }} -- sh -c 'sudo adduser --disabled-password --gecos "" {{ user }}'
   ignore_errors: true
@@ -15,6 +19,8 @@
   
 - name: "Check user in container"
   shell: 
+    environment:
+      LXC: "{{ lxc_exec }}"
     executable: /bin/bash
     cmd: $LXC exec {{ container }} -- sh -c 'cat /etc/sudoers'
   register: user_info
@@ -22,6 +28,8 @@
 
 - name: Add user to sudoer
   shell: 
+    environment:
+      LXC: "{{ lxc_exec }}"
     executable: /bin/bash
     cmd: |
       $LXC exec {{ container }} -- sh -c 'sudo echo "{{ user }} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers'

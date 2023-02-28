@@ -1,5 +1,7 @@
 - name: Config lxd server
   shell: 
+    environment:
+      LXC: "{{ lxc_exec }}"
     executable: /bin/bash
     cmd: |
       $LXC config set core.https_address={{ LXD_ADDR }}
