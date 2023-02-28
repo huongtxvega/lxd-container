@@ -2,5 +2,5 @@
   shell: 
     executable: /bin/bash
     cmd: |
-      "/snap/bin/lxc config set core.https_address={{ LXD_ADDR }}"
-      "/snap/bin/lxc config set core.trust_password={{ LXD_SERVER_PASS }}"
+      "{{ lxc_exec }} config set core.https_address={{ LXD_ADDR }}"
+      "{{ lxc_exec }} config set core.trust_password={{ LXD_SERVER_PASS }}"

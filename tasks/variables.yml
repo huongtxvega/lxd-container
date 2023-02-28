@@ -3,6 +3,17 @@
 - name: Include variables.
   include_vars: "main.yml"
 
+- name: Check lxc executable
+  shell: which lxc
+  register: lxc_check
+  run_once: true
+
+- debug: msg="Found lxc executable in {{ lxc_check.stdout }}"
+
+- name: Define variable.
+  set_fact: 
+    lxc_exec: "{{ lxc_check.stdout }}"
+
 # - name: Define variable.
 #   set_fact:
 #     var_name: "{{ var_from_vars | list }}"

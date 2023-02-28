@@ -2,7 +2,7 @@
 - name: Check lxd container
   shell: 
     executable: /bin/bash
-    cmd: "/snap/bin/lxc list"
+    cmd: "{{ lxc_exec }} list"
   register: remote_info
   ignore_errors: true
 
@@ -11,6 +11,6 @@
 - name: Create container
   shell:
     executable: /bin/bash
-    cmd: "/snap/bin/lxc launch images:{{ image }} {{ item }}"
+    cmd: "{{ lxc_exec }} launch images:{{ image }} {{ item }}"
   when: not remote_info.stdout | regex_search('\s{{ item }}\s', ignorecase=True)
   with_items: "{{ containers }}"
