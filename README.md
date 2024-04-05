@@ -22,7 +22,7 @@ Simple role for creating lxd container and add sudo-user on RHEL/CentOS or Debia
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-* `image`: ubuntu/20.04  
+* `image`: ubuntu:20.04  
   Image name, see [https://uk.lxd.images.canonical.com/](https://uk.lxd.images.canonical.com/)  
 
 * `containers`: [image1]  
@@ -46,7 +46,7 @@ None.
         - role: huongtxvega.lxd_container
           vars:
             - user: user
-            - image: "ubuntu/20.04"
+            - image: "ubuntu:20.04"
             - containers:
               - testrole
 
